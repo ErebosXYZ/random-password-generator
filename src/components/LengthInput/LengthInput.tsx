@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./LengthInput.module.css";
 
 type LengthInputProps= {
     length: number;
@@ -6,7 +7,7 @@ type LengthInputProps= {
 }
 
 
-export default function LengthInput({ length, onLengthChange }: LengthInputProps) {
+export default function LengthInput({ length, onLengthChange }: LengthInputProps): React.ReactElement {
     // Use state guarda el valor de l'input de manera reactiva. I handlechange actualitza el valor de l'input cada cop que l'usuari el canvia.
    
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,10 +16,10 @@ export default function LengthInput({ length, onLengthChange }: LengthInputProps
 
     return (
         <div>
-            <label>Password Length: </label>
+            <label className={styles.label}>Password Length: </label>
             <input type="number"
             value={length}
-            onChange={handleChange}
+            onChange={handleChange} className={styles.input}
             />
         </div>
     );

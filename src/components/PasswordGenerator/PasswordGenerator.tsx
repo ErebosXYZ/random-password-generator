@@ -19,7 +19,7 @@ function PasswordGenerator() {
 
      }
     return(
-        <section>
+        <section className="container">
         <h1>Random Password Generator</h1>
         <LengthInput length={length} onLengthChange={setLength}/>
         {/* Opcional: crear checkboxes de complexitat: Uppercase, lowercase, numbers, special characters */}

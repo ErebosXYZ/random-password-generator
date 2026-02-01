@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./GenerateButton.module.css"
 
 type ButtonProps = {
     onClick: () => void;
@@ -7,6 +8,6 @@ type ButtonProps = {
 
 export default function GenerateButton({ onClick, label }: ButtonProps) {
     return(
-        <button onClick={onClick} >{label}</button>
+        <button onClick={onClick} className={styles.button}>{label}</button>
     )
 }
