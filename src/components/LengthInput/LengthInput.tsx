@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./LengthInput.module.css";
 
-type LengthInputProps= {
+type LengthInputProps = {
     length: number;
     onLengthChange: (value: number) => void;
 }
