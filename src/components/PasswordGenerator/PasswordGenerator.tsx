@@ -4,6 +4,8 @@ import LengthInput from "../LengthInput/LengthInput";
 import PasswordDisplay from "../PasswordDisplay/PasswordDisplay";
 import GenerateButton from "../GenerateButton/GenerateButton";
 import OptionsCheckbox from "../OptionsCheckbox/OptionsCheckbox";
+import SecurityGraph from "../SecurityGraph/SecurityGraph";
+import { calculateStrength } from "../../hooks/usePasswordStrength";
 
 type GeneratorOptions = {
   uppercase: boolean;
@@ -15,6 +17,7 @@ type GeneratorOptions = {
 function PasswordGenerator() {
   const [length, setLength] = useState(10);
   const [password, setPassword] = useState("");
+  const [strength, setStrength] = useState<number>(0);
   const [options, setOptions] = useState<GeneratorOptions>({
     uppercase: false,
     lowercase: false,
@@ -35,7 +38,7 @@ function PasswordGenerator() {
     let result = "";
     // Com que les object keys de charsets i opcions són iguals, recorrem options, que controla l'estat (per defecte false) i si el checkbox està marcat (true) afegim el valor de la mateixa key de charSets
     for (const o of Object.keys(options) as Array<keyof GeneratorOptions>) {
-      if (options[o] === true) {
+      if (options[o]) {
         availableChars += charSets[o];
       }
     }
@@ -50,6 +53,10 @@ function PasswordGenerator() {
     }
     setPassword(result);
 
+    const strengthScore = calculateStrength(passwordLength, options);
+    setStrength(strengthScore);
+    
+
   }
   return (
     <section className="container">
@@ -58,6 +65,7 @@ function PasswordGenerator() {
       <OptionsCheckbox options={options} onChange={setOptions} />
       <GenerateButton onClick={() => generatePassword(length)} label="Generate Password" />
       <PasswordDisplay password={password} />
+      <SecurityGraph strength={strength} generatedPassword={password}/>
     </section>
   )
 }
